@@ -2,6 +2,16 @@
 
 VProfile is a Java web application for user registration, authentication, profile management, caching, message-broker checks, and Elasticsearch-backed user operations. This repository is the **application** component of the wider Production Platform: it contains the source code, container definitions, and GitHub Actions workflow that validates pull requests, publishes an image after a `main` push, and updates a separate Helm repository.
 
+## Environment Availability Notice
+
+> **Note:** This is a portfolio project, and some AWS resources are intentionally stopped when not in use to avoid unnecessary costs.
+>
+> Certain CI/CD workflow runs may fail when required external services are unavailable. For example, pull-request validation requires a reachable SonarQube server, while image publishing depends on valid AWS credentials and Amazon ECR access.
+>
+> A failed workflow run does not necessarily indicate an issue with the workflow configuration. The exact failure step must be reviewed to determine whether the cause is an unavailable service, an authentication issue, or a configuration problem.
+>
+> AWS resources are not kept running continuously for cost optimization. Full end-to-end deployment can be verified when the required services and infrastructure are available.
+
 The surrounding repositories have distinct responsibilities:
 
 | Repository | Responsibility |
@@ -212,7 +222,3 @@ The current AWS action is configured with long-lived access-key secrets. GitHub 
 - JaCoCo coverage is configured in Sonar properties but disabled in Maven.
 - The application and deployment configuration contain plaintext credentials that should be externalized.
 - The multi-stage image build and Argo CD chart reference require alignment to make the intended commit-to-deployment traceability real.
-
-## License
-
-No license file is present in this repository. No license is asserted by this documentation.
